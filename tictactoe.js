@@ -20,6 +20,7 @@ function addItem(p) {
 }
   let player0 = 0;
   let playerX = 0;
+
 function  checkBoxes(matrix0, matrixX, matrixCheck) {
   for(let i = 0; i < matrixCheck.length; ++i) {
     let row  = matrixCheck[i];
@@ -27,26 +28,28 @@ function  checkBoxes(matrix0, matrixX, matrixCheck) {
     playerX = 0;
     let winner = 'equality';
     for(let j = 0; j < row.length; ++j) {
-      for(let z = 0; z < matrix0.length; ++z) {
+      for(let z = 0; z < matrix0.length || z < matrixX.length; ++z) {
+        if(matrixX[z] == row[j]) {
+          ++playerX;
+        }
         if(matrix0[z] == row[j]) {
           ++player0;
-        }
-        else if (matrixX[z] == row[j]) {
-          ++playerX;
         }
       }
       if(playerX == 3) {
         winner = "x";
-      }
-      if(player0 == 3) {
+           z = matrixX.length;
+      } else if(player0 == 3) {
         winner  = "0";
-      }
+           z = matrix0.lenght;
+      } 
     }
     winningPlayer(winner);
   }
 }
 let check_equal = 0;
-function  winningPlayer(w) {
+
+function winningPlayer(w) {
   if(w === "equality") {
     ++check_equal;
   } else {
